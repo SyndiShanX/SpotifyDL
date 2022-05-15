@@ -1,6 +1,8 @@
 # SpotifyDL
 [Spicetify](https://github.com/khanhas/spicetify-cli) extension that copies various information about the songs in your Playlist (Artist, Album Name, Date Added, Duration, Image URL, Song URL) **Only use with SpotifyDL.**
 
+**You need to have [Windows Terminal](https://github.com/microsoft/terminal) Installed**
+
 # To Install:
 Copy `copyPlaylistInfoSpotifyDL.js` into your [Spicetify](https://github.com/khanhas/spicetify-cli) extensions directory:
 | **Platform** | **Path**                                                                            |
