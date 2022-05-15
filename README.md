@@ -19,6 +19,7 @@ spicetify apply
 Filename : `copyPlaylistInfoSpotifyDL.js`
 
 ## To use:
-* Right Click on Playlist > Copy Playlist Info > Paste into Songs.json and Save as a JSON File" 
+* Right Click on Playlist > Copy Playlist Info > Paste into Songs.json and Save"
+* Run SpotifyDL.py in CMD using `python SpotifyDL.py`
 
 ![Preview](https://raw.githubusercontent.com/SyndiShanX/spicetify-extensions/main/copyPlaylistInfo/preview.jpg)
