@@ -12,10 +12,10 @@ SongsJson = json.load(Songs)
 
 FilesList = os.listdir(fileDir + 'Downloaded-Songs')
 DownloadedSongNames = [file for file in FilesList if file.endswith('.mp3')]
-DownloadedSongNames = str(DownloadedSongNames).replace('é', 'e').replace('Ø', 'O').replace('AC/DC', 'ACDC').replace('Au/Ra', 'AuRa').replace('Axwell / Ingrosso', 'Axwell  Ingrosso').replace('Run–D.M.C.', 'Run D.M.C.').replace('ö', 'o').replace('ë', 'e').replace('å', 'a').replace('XXXTENTACION', 'XXXTentacion').replace('SABAI', 'Sabai').replace('Weird Al', "\'Weird Al\'").replace("\'Weird Al\' Yankovic - Foil", "\'Weird Al\' Yankovic - Foil").replace("Call of the Dead", "\'Call of the Dead\'").replace("Ridin\'", "\'Ridin\'\'").replace('Garrett Nash', 'gnash').replace('Ü', 'U').replace('á', 'a').replace('?', '').replace(' / ', '  ').replace('Wreck-It Ralph/Soundtrack', "\'Wreck-It Ralph\'Soundtrack").replace('’', "\'").replace('TROLLS', '\'TROLLS\'').replace('Friends', '\'Friends\'').replace('8 Mile', '\'8 Mile\'').replace('The Voice', '\'The Voice\'').replace('.../...', '......').replace('ñ', 'n').replace('*', '').replace('Man: Into', 'Man -  Into').replace('Parody of Party In The USA', "Parody of \'Party In The U.S.A.\'").replace('Armageddon', "\'Armageddon\'").replace('Alice Through The Looking Glass', "\'Alice Through The Looking Glass\'").replace('“', '').replace('”', '')
+DownloadedSongNames = str(DownloadedSongNames).replace('é', 'e').replace('Ø', 'O').replace('AC/DC', 'ACDC').replace('Au/Ra', 'AuRa').replace('Axwell / Ingrosso', 'Axwell  Ingrosso').replace('Run–D.M.C.', 'Run D.M.C.').replace('ö', 'o').replace('ë', 'e').replace('å', 'a').replace('XXXTENTACION', 'XXXTentacion').replace('SABAI', 'Sabai').replace('Weird Al', "\'Weird Al\'").replace("\'Weird Al\' Yankovic - Foil", "\'Weird Al\' Yankovic - Foil").replace("Call of the Dead", "\'Call of the Dead\'").replace("Ridin\'", "\'Ridin\'\'").replace('Garrett Nash', 'gnash').replace('Ü', 'U').replace('á', 'a').replace('?', '').replace(' / ', '  ').replace('Wreck-It Ralph/Soundtrack', "\'Wreck-It Ralph\'Soundtrack").replace('’', "\'").replace('TROLLS', '\'TROLLS\'').replace('Friends', '\'Friends\'').replace('8 Mile', '\'8 Mile\'').replace('The Voice', '\'The Voice\'').replace('.../...', '......').replace('ñ', 'n').replace('*', '').replace('Man- Into', 'Man -  Into').replace('Parody of Party In The USA', "Parody of \'Party In The U.S.A.\'").replace('Armageddon', "\'Armageddon\'").replace('Alice Through The Looking Glass', "\'Alice Through The Looking Glass\'").replace("From 'Despicable Me 2'", 'From Despicable Me 2').replace("Joan Jett & The Blackhearts - I Love Rock 'N Roll","Joan Jett & the Blackhearts - I Love Rock 'N Roll").replace('“', '').replace('”', '')
 
 f = open(fileDir + 'Songs.bat', 'w')
-f.write('')
+f.write('cd Downloading\n')
 f.close()
 
 i = 0
@@ -516,19 +516,28 @@ while i < len(SongsJson['Songs']):
 
     if SongNameReal == 'Skip':
         f = open(fileDir + 'Songs.bat', 'a')
-        f.write('spotdl ' + SongURL + ' -o "' + fileDir + 'Downloaded-Songs"\n')
+        f.write('spotdl sync ' + SongURL + ' --save-file test.spotdl\n')
+        f.write('cd ..\n')
+        f.write('xcopy /E/V/I/S/EXCLUDE:.\Exclude.txt "Downloading" "Downloaded-Songs"\n')
+        f.write('cd Downloading\n')
         f.close()
         print('Song with filename: "' + SongFileNameTest + '" not found, and added to the Download List!')
     elif SongFileNameTest.lower() != SongFileNameReal.lower():
         f = open(fileDir + 'Songs.bat', 'a')
-        f.write('spotdl ' + SongURL + ' -o "' + fileDir + 'Downloaded-Songs"\n')
+        f.write('spotdl sync ' + SongURL + ' --save-file test.spotdl\n')
+        f.write('cd ..\n')
+        f.write('xcopy /E/V/I/S/EXCLUDE:.\Exclude.txt "Downloading" "Downloaded-Songs"\n')
+        f.write('cd Downloading\n')
         f.close()
         print('Song with filename: "' + SongFileNameReal + '" not found, and added to the Download List!')
     else:
         # noinspection PyUnboundLocalVariable
         if SongNameReal == '':
             f = open(fileDir + 'Songs.bat', 'a')
-            f.write('spotdl ' + SongURL + ' -o "' + fileDir + 'Downloaded-Songs"\n')
+            f.write('spotdl sync ' + SongURL + ' --save-file test.spotdl\n')
+            f.write('cd ..\n')
+            f.write('xcopy /E/V/I/S/EXCLUDE:.\Exclude.txt "Downloading" "Downloaded-Songs"\n')
+            f.write('cd Downloading\n')
             f.close()
             print('Song with filename: "' + SongFileNameReal + '" not found, and added to the Download List!')
         else:
@@ -536,10 +545,10 @@ while i < len(SongsJson['Songs']):
     i = i + 1
     SongNameReal = ''
 
-SongsYT = open(fileDir + 'Songs.bat', 'r').read().replace('spotdl https://open.spotify.com/track/11empTcflLLXn41XHmitrW -o "' + fileDir + 'Downloaded-Songs"', 'spotdl https://www.youtube.com/watch?v=CojnI6ikXMg|https://open.spotify.com/track/11empTcflLLXn41XHmitrW -o "' + fileDir + 'Downloaded-Songs"')
+# SongsYT = open(fileDir + 'Songs.bat', 'r').read().replace('spotdl https://open.spotify.com/track/11empTcflLLXn41XHmitrW -o "' + fileDir + 'Downloaded-Songs"', 'spotdl  https://www.youtube.com/watch?v=CojnI6ikXMg|https://open.spotify.com/track/11empTcflLLXn41XHmitrW -o "' + fileDir + 'Downloaded-Songs"')
 
-f = open(fileDir + 'Songs.bat', 'w')
-f.write(SongsYT)
-f.close()
+# f = open(fileDir + 'Songs.bat', 'w')
+# f.write(SongsYT)
+# f.close()
 
 subprocess.call('wt ' + fileDir + 'Songs.bat')
