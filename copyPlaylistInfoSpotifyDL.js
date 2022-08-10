@@ -28,7 +28,8 @@
 	
 	async function copyPlaylistInfo(uri) {
 		playlist = await Spicetify.Platform.PlaylistAPI.getMetadata(uri)
-		tracks = await Spicetify.Platform.PlaylistAPI.getContents(uri)
+		tracks = await Spicetify.Platform.PlaylistAPI.getContents(["spotify:playlist:7efgl2MEIzMHmsijvxeoH9"])
+		//console.log(uri)
 		synTracks = ''
 		
 		function millisToMinutesAndSeconds(millis) {
@@ -38,11 +39,13 @@
 		}
 		
 		for (i = 0; i < tracks.items.length; i++) {
-			synTracks = synTracks + '		{\n			"Song Name":  "' + tracks.items[i].name.replaceAll('"', '').replaceAll("'", "\'").replaceAll('\\', '') + '",\n' + '			"Artist":     "' + getArtists(i) + '			"Album Name": "' +tracks.items[i].album.name.replaceAll('"', '').replaceAll("'", "\'").replaceAll('\\', '') + '",\n' + '			"Date Added": "' + tracks.items[i].addedAt.toDateString().substring(4) + '",\n' + '			"Duration":   "' + millisToMinutesAndSeconds(tracks.items[i].duration.milliseconds) + '",\n' + '			"Image URL":  "https://i.scdn.co/image/' + tracks.items[i].album.images[0].url.split('image:')[1] + '",\n' + '			"Song URL":   "https://open.spotify.com/track/' + tracks.items[i].uri.split('track:')[1] + '"\n		},\n'
+			//console.log(i)
+			songDate = tracks.items[i].addedAt; songDate = new Date(songDate); songDate = songDate.toDateString().substring(4)
+			synTracks = synTracks + '		{\n			"Song Name":  "' + tracks.items[i].name.replaceAll('"', '').replaceAll("'", "\'").replaceAll('\\', '') + '",\n' + '			"Artist":     "' + getArtists(i) + '			"Album Name": "' +tracks.items[i].album.name.replaceAll('"', '').replaceAll("'", "\'").replaceAll('\\', '') + '",\n' + '			"Date Added": "' + songDate + '",\n' + '			"Duration":   "' + millisToMinutesAndSeconds(tracks.items[i].duration.milliseconds) + '",\n' + '			"Image URL":  "https://i.scdn.co/image/' + tracks.items[i].album.images[0].url.split('image:')[1] + '",\n' + '			"Song URL":   "https://open.spotify.com/track/' + tracks.items[i].uri.split('track:')[1] + '"\n		},\n'
 		}
 		
 		synPlaylist = '{\n	"Playlist": "' + playlist.name + '",\n  "Songs": [\n' + synTracks.slice(0, -2) + '\n  ]\n}'
-		synPlaylist = synPlaylist.replaceAll('é', 'e').replaceAll('Ø', 'O').replaceAll('AC/DC', 'ACDC').replaceAll('Au/Ra', 'AuRa').replaceAll('Axwell / Ingrosso', 'Axwell  Ingrosso').replaceAll('Run–D.M.C.', 'Run D.M.C.').replaceAll('ö', 'o').replaceAll('ë', 'e').replaceAll('å', 'a').replaceAll('XXXTENTACION', 'XXXTentacion').replaceAll('SABAI', 'Sabai').replaceAll('Weird Al', "\'Weird Al\'").replaceAll("\'Weird Al\' Yankovic - Foil", "\'Weird Al\' Yankovic - Foil").replaceAll("Call of the Dead", "\'Call of the Dead\'").replaceAll("Ridin\'", "\'Ridin\'\'").replaceAll('Garrett Nash', 'gnash').replaceAll('Ü', 'U').replaceAll('á', 'a').replaceAll('?', '').replaceAll(' / ', '  ').replaceAll('Wreck-It Ralph/Soundtrack', "\'Wreck-It Ralph\'Soundtrack").replaceAll('’', "\'").replaceAll('TROLLS', '\'TROLLS\'').replaceAll('Friends', '\'Friends\'').replaceAll('8 Mile', '\'8 Mile\'').replaceAll('The Voice', '\'The Voice\'').replaceAll('.../...', '......').replaceAll('ñ', 'n').replaceAll('*', '').replaceAll('Man: Into', 'Man -  Into').replaceAll('Parody of Party In The USA', "Parody of \'Party In The U.S.A.\'").replaceAll('Armageddon', "\'Armageddon\'").replaceAll('Alice Through The Looking Glass', "\'Alice Through The Looking Glass\'").replaceAll('“', '').replaceAll('”', '')
+		synPlaylist = synPlaylist.replaceAll('é', 'e').replaceAll('Ø', 'O').replaceAll('AC/DC', 'ACDC').replaceAll('Au/Ra', 'AuRa').replaceAll('Axwell / Ingrosso', 'Axwell  Ingrosso').replaceAll('Run–D.M.C.', 'Run D.M.C.').replaceAll('ö', 'o').replaceAll('ë', 'e').replaceAll('å', 'a').replaceAll('XXXTENTACION', 'XXXTentacion').replaceAll('SABAI', 'Sabai').replaceAll('Weird Al', "\'Weird Al\'").replaceAll("\'Weird Al\' Yankovic - Foil", "\'Weird Al\' Yankovic - Foil").replaceAll("Call of the Dead", "\'Call of the Dead\'").replaceAll("Ridin'", "'Ridin'").replaceAll('Garrett Nash', 'gnash').replaceAll('Ü', 'U').replaceAll('á', 'a').replaceAll('?', '').replaceAll(' / ', '  ').replaceAll('Wreck-It Ralph/Soundtrack', "\'Wreck-It Ralph\'Soundtrack").replaceAll('’', "\'").replaceAll('TROLLS', '\'TROLLS\'').replaceAll('Friends', '\'Friends\'').replaceAll('8 Mile', '\'8 Mile\'').replaceAll('The Voice', '\'The Voice\'').replaceAll('.../...', '......').replaceAll('ñ', 'n').replaceAll('*', '').replaceAll('Man- Into', 'Man -  Into').replaceAll('Parody of Party In The USA', "Parody of \'Party In The U.S.A.\'").replaceAll('Armageddon', "\'Armageddon\'").replaceAll('Alice Through The Looking Glass', "\'Alice Through The Looking Glass\'").replaceAll("From 'Despicable Me 2'", 'From Despicable Me 2').replaceAll("Joan Jett & The Blackhearts - I Love Rock 'N Roll", "Joan Jett & the Blackhearts - I Love Rock 'N Roll").replaceAll('“', '').replaceAll('”', '').replaceAll("''", "'").replaceAll("'", '')
 		
 		var synDiv = document.createElement('div');
 		var synInput = document.createElement('textarea');
