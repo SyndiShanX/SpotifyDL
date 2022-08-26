@@ -506,7 +506,7 @@ while i < len(SongsJson['Songs']):
 
     if SongNameReal == 'Skip':
         f = open(fileDir + 'Songs.bat', 'a')
-        f.write('spotdl sync ' + SongURL + ' --save-file test.spotdl\n')
+        f.write('spotdl sync ' + SongURL + ' --save-file songs.spotdl\n')
         f.write('cd ..\n')
         f.write('xcopy /E/V/I/S/EXCLUDE:.\Exclude.txt "Downloading" "Downloaded-Songs"\n')
         f.write('cd Downloading\n')
@@ -514,7 +514,7 @@ while i < len(SongsJson['Songs']):
         print('Song with filename: "' + SongArtistFinal + ' - ' + SongName + '.mp3' + '" not found, and added to the Download List!')
     elif SongFileNameTest.lower() != SongFileNameRealTest.lower():
         f = open(fileDir + 'Songs.bat', 'a')
-        f.write('spotdl sync ' + SongURL + ' --save-file test.spotdl\n')
+        f.write('spotdl sync ' + SongURL + ' --save-file songs.spotdl\n')
         f.write('cd ..\n')
         f.write('xcopy /E/V/I/S/EXCLUDE:.\Exclude.txt "Downloading" "Downloaded-Songs"\n')
         f.write('cd Downloading\n')
@@ -524,7 +524,7 @@ while i < len(SongsJson['Songs']):
         # noinspection PyUnboundLocalVariable
         if SongNameReal == '':
             f = open(fileDir + 'Songs.bat', 'a')
-            f.write('spotdl sync ' + SongURL + ' --save-file test.spotdl\n')
+            f.write('spotdl sync ' + SongURL + ' --save-file songs.spotdl\n')
             f.write('cd ..\n')
             f.write('xcopy /E/V/I/S/EXCLUDE:.\Exclude.txt "Downloading" "Downloaded-Songs"\n')
             f.write('cd Downloading\n')
